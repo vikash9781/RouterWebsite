@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 
 
@@ -27,51 +27,62 @@ const SignupForm = ({setIsLoggedIn}) => {
         
     }  
     const [ showPassword , setShowPassword] = useState(false); 
-    const [ accountType , setAccoutTpye] = useState("student");
+    const [ accountType , setAccoutTpye] = useState("Customer");
     const [ showConfirmPassword , setShowConfirmPassword] = useState(false); 
 
 
    function submitHandler(event){
 
-
     event.preventDefault();
-    if(formData.password != formData.confirmPassword){
+    if(formData.password !== formData.confirmPassword){
         toast.error("Password does not match");
-    }
-    
-     setIsLoggedIn(true);
+    }else{
+        setIsLoggedIn(false);
         toast.success("Account Created")
         const formKaData = {
            ...formData
         }
-
+        console.log(formKaData)
         const finalData = {
             formKaData , accountType
         }
       
-        navigate("/dashboard")
+        navigate("/login")
         console.log(finalData)
     }
-        
+    }
+    
+    
+
+    useEffect(() => {
+        const emaildata = [formData.email , formData.password]
+    
+    localStorage.setItem('formData' , JSON.stringify(emaildata  
+    )
+    )
+    console.log(emaildata)
+    
+    }, [formData])
+
     
    
 
     return(
         <div >
           <div className="flex bg-gray-900 p-1 gap-x-1 my-6 rounded-full max-w-max" >
-            <button className={`${accountType ==="student" ?
+            <button className={`${accountType ==="Customer" ?
               "bg-black text-gray-300"
             : "bg-transparent text-gray-500"} py-2 px-5 rounded-full transition-all duration-200"
              `}
-             onClick={() => setAccoutTpye("student")}>
-                Student
+             onClick={() => setAccoutTpye("Customer")}>
+                Customer
             </button>
 
-            <button className={`${accountType ==="instructor" ?
+            <button className={`${accountType ==="Seller" ?
               "bg-black text-gray-300"
             : "bg-transparent text-gray-500"} py-2 px-5 rounded-full transition-all duration-200"
-             `} onClick={() => setAccoutTpye("instructor")}>
-                Instructor
+             `} onClick={() => setAccoutTpye("Seller")}>
+                Seller
             </button>
 
           </div>

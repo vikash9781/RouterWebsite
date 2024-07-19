@@ -1,12 +1,12 @@
-import { useState } from "react";
+import {  useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import {   Link, useNavigate } from "react-router-dom";
 
 const LoginForm = ({setIsLoggedIn}) => {
 const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
+    const [formkaData, setFormkaData] = useState({
         email : "",
         password : ""
     })
@@ -14,17 +14,39 @@ const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
     function changeHandler(event) {
-        setFormData((prevData) => ({
+        setFormkaData((prevData) => ({
             ...prevData,
             [event.target.name] : event.target.value
         }))
     }
+    // useEffect(()=>{
+    //     const formData = JSON.parse(localStorage.getItem('formData'));
+    //     if(formData){
+    //         setFormData(formData)
+    //     }
+    // },[])
    function submitHandler(event){
     event.preventDefault();
+    const localData = JSON.parse(localStorage.getItem('formData'));
+    console.log(localData);
+    console.log(localData.password)
+    console.log(formkaData)
+   if(localData[0] === formkaData.email && localData[1] === formkaData.password)
+   {
+    localStorage.setItem('formData', true);
+    
     setIsLoggedIn(true);
     toast.success("Logged In")
     navigate("/dashboard")
+    console.log(formkaData)
+   }else{
+    alert("Invalid Credentials")
    }
+   
+   
+   }
+
+    
 
     return(
         <div>
@@ -40,7 +62,7 @@ const navigate = useNavigate();
             <input
          required
          type="email"
-         value={formData.email}
+         value={formkaData.email}
          onChange={changeHandler}
          placeholder="Enter the Email Id"
          name="email"
@@ -57,7 +79,7 @@ const navigate = useNavigate();
             <input
          required
          type={showPassword ? ("text") : ("password")}
-         value={formData.password}
+         value={formkaData.password}
          onChange={changeHandler}
          placeholder="Enter the Password"
          name="password"

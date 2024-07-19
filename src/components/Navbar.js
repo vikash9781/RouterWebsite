@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BsCart4 } from 'react-icons/bs';
 import toast from 'react-hot-toast';
@@ -12,6 +12,10 @@ const Navbar = (props) => {
     const isLoggedIn = props.isLoggedIn;
     const setIsLoggedIn = props.setIsLoggedIn;
     const {cart} = useSelector((state) => state)
+
+    useEffect(()=> {
+        console.log("cart Data printed")
+    },[])
  
  const navigate = useNavigate();
     function navigationHandler(){
@@ -24,13 +28,13 @@ const Navbar = (props) => {
     
     return(
         <div className='flex justify-between items-center w-11/12 max-w-[1160px] py-4 mx-auto '>
-      <Link to="/home">
+      <Link to="/">
       <img src={image} alt='logo' width={160} height={32} loading='lazy'/>
       </Link>
 
       <ul className='text-white flex gap-x-6'>
         <li>
-            <Link to="/home" className='border py-1 px-2 justify-center text-center'>Home</Link>
+            <Link to="/" className='border py-1 px-2 justify-center text-center'>Home</Link>
         </li>
 
         
@@ -55,7 +59,7 @@ const Navbar = (props) => {
 
         { 
             isLoggedIn &&
-            <Link to="/home">
+            <Link to="/">
              <button onClick={() => {
                 setIsLoggedIn(false)
                 toast.success("Logged Out")

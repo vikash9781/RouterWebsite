@@ -10,10 +10,11 @@ function Cart() {
 
     const {cart} = useSelector((state) => state);
     const [totalAmount , setTotalAmout] = useState(0);
+    console.log(cart)
 
     useEffect(() => {
         setTotalAmout( cart.reduce((acc, curr) => acc + curr.price , 0))
-    },[cart]); 
+    },[]); 
 
     return(
         <div className="justify-center items-center max-w-[1160px] w-11/12 p-2 mx-auto space-y-10 h-full">

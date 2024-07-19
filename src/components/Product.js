@@ -1,12 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import {toast} from "react-hot-toast"
 import { remove , add} from "../redux/slices/CartSlice";
+import { useEffect } from "react";
 
 
 function Products({post}) {
 
     const {cart} = useSelector((state) => state);
     const dispatch = useDispatch();
+
+    useEffect(()=> {
+        console.log("product data printed")
+    },[])
 
     const addToCart = () => {
         dispatch(add(post));
