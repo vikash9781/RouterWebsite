@@ -57,8 +57,7 @@ const SignupForm = ({setIsLoggedIn}) => {
     useEffect(() => {
         const emaildata = [formData.email , formData.password]
     
-    localStorage.setItem('formData' , JSON.stringify(emaildata  
-    )
+    localStorage.setItem('formData' , JSON.stringify(emaildata  )
     )
     console.log(emaildata)
     
@@ -151,10 +150,10 @@ const SignupForm = ({setIsLoggedIn}) => {
                 value={formData.password}
                 className="bg-gray-800 rounded-[0.5rem] text-gray-300 w-full p-[12px]"
                 />
-                   <span className="relative cursor-pointer bottom-[30px] left-[190px]"
+                   <span 
                     onClick={() => setShowPassword ((prev) => !prev)}>
-                        {showPassword ? (<AiOutlineEyeInvisible fontSize={20} fill="#AFB2BF" />) :
-                         (<AiOutlineEye fontSize={20} fill="#AFB2BF" />)}
+                        {showPassword ? (<AiOutlineEyeInvisible fontSize={20} fill="#AFB2BF" className="relative cursor-pointer bottom-[30px] left-[190px]"/>) :
+                         (<AiOutlineEye fontSize={20} fill="#AFB2BF" className="relative cursor-pointer bottom-[30px] left-[190px]" />)}
                    </span>
                  </label>
         
